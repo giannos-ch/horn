@@ -20,6 +20,14 @@ module Horn
       @top_down = TopDown.new(@program, @const_collection)
     end
 
+    def solve(&)
+      @program.queries.each do |query|
+        run(query) do |result|
+          yield({query, result})
+        end
+      end
+    end
+
     def run(expr : Expr, &)
       @cache.reset
       disjucts = Array({Expr, String?}).new
@@ -264,8 +272,8 @@ module Horn
       when Const
         if !@const_collection[expr].predicate?
           {expr, false}
-        elsif @program.has_key?(expr)
-          {@program[expr], true}
+        elsif @program.rules.has_key?(expr)
+          {@program.rules[expr], true}
         else
           {False.new, true}
         end

@@ -26,6 +26,10 @@ This repository contains the implementation of **HORN**, a higher-order logic pr
 - **Location**: All tests must be written in the `spec/` directory.
 - **Execution**: Run tests using the `crystal spec` command.
 
+## Build & Run
+- **Build**: Compile the project using `shards build`.
+- **Run**: Execute the binary with `./bin/horn -f <horn_file>`.
+
 ## Key Files
 - `src/horn.cr`: Main entry point.
 - `shard.yml`: Project dependencies and configuration.

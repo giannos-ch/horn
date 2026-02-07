@@ -11,7 +11,6 @@ module Horn
 
     getter program = Program.new
     getter const_collection = ConstCollection.new
-    getter queries = Array(Expr).new
 
     @ts_parser : TSParser
     @type_parser : TypeParser
@@ -65,7 +64,7 @@ module Horn
     end
 
     private def parse_query(node)
-      @queries << @expression_parser.parse(node.children[0])
+      @program.queries << @expression_parser.parse(node.children[0])
     end
 
     private def parse_head(nodes, parsed_body : Expr?)
@@ -112,10 +111,10 @@ module Horn
 
     private def add_to_program(clause : {Expressions::Const, Expr})
       head, body = clause
-      if @program.has_key?(head)
-        @program[head] = Or.new(@program[head], body)
+      if @program.rules.has_key?(head)
+        @program.rules[head] = Or.new(@program.rules[head], body)
       else
-        @program[head] = body
+        @program.rules[head] = body
       end
     end
   end

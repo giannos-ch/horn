@@ -4,7 +4,12 @@ module Horn
       {{Strategy.subclasses}}.find { |s| s.name == name }
     end
 
-    abstract def eval(expr : Expr)
-    abstract def visualize
+    def visualize
+      raise "Not implemented"
+    end
+
+    def solve(&)
+      raise "Not implemented"
+    end
   end
 end

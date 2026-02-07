@@ -5,13 +5,14 @@ require "../spec_helper"
 module Horn
   include Expressions
 
-  p = {
+  p = Program.new
+  p.rules.merge!({
     Const.new("p_true")  => Expressions::True.new,
     Const.new("p_false") => Expressions::False.new,
     Const.new("p_a")     => Lambda.new(Var.new("X"), Types::I.new, Eq.new(Var.new("X"), Const.new("a"))),
     Const.new("p_p_a")   => Lambda.new(Var.new("P"), Types::Arrow.new(Types::I.new, Types::O.new),
       Appl.new(Var.new("P"), Const.new("a"))),
-  }
+  })
 
   const_collection = {
     Const.new("p_true")  => Types::O.new,

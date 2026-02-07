@@ -20,6 +20,12 @@ module Horn
       @cache = Caching(Expr, Value).new(->cache_valid?(Expr))
     end
 
+    def solve(&)
+      @program.queries.each do |query|
+        yield({query, eval(query)})
+      end
+    end
+
     def eval(expr : Expr) : Value
       eval(expr, nil)
     end
@@ -141,8 +147,8 @@ module Horn
       when Const
         if !@const_collection[expr].predicate?
           {expr, false}
-        elsif @program.has_key?(expr)
-          {@program[expr], true}
+        elsif @program.rules.has_key?(expr)
+          {@program.rules[expr], true}
         else
           {False.new, true}
         end
