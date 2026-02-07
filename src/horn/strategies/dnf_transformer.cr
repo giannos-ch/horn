@@ -20,7 +20,7 @@ module Horn
       @top_down = TopDown.new(@program, @const_collection)
     end
 
-    def run(expr : Expr)
+    def run(expr : Expr, &)
       @cache.reset
       disjucts = Array({Expr, String?}).new
       disjucts << {expr, nil}
