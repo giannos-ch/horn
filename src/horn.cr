@@ -63,26 +63,25 @@ module Horn
   end
 
   if verbose
-    puts "Program:"
-    puts parser.program.to_pretty_json
+    puts "Program rules:"
+    puts parser.program.rules.to_pretty_json
     puts "Const collection:"
     puts parser.const_collection.to_pretty_json
     puts "Queries:"
-    puts parser.queries.to_json
+    puts parser.program.queries.to_json
     puts "Run:"
   end
 
   strategy = strategy_class.not_nil!.new(parser.program, parser.const_collection)
 
   begin
-    parser.queries.each do |query|
+    strategy.solve do |query_and_result|
+      query, result = query_and_result
       puts "#{query} =>"
-      if strategy.responds_to?(:run)
-        strategy.run(query) do |result|
-          puts result.join(", ")
-        end
+      if result.is_a?(Enumerable)
+        puts result.join(", ")
       else
-        puts strategy.eval(query)
+        puts result
       end
     end
   rescue e

@@ -7,18 +7,18 @@ module Horn
     it "parses" do
       parser = Parser.new("#{__DIR__}/../fixtures/program.horn")
       parser.parse
-      parser.program.size.should eq(2)
+      parser.program.rules.size.should eq(2)
       parser.const_collection.size.should eq(4)
-      parser.queries.size.should eq(1)
+      parser.program.queries.size.should eq(1)
     end
 
     it "parses free variables" do
       parser = Parser.new("#{__DIR__}/../fixtures/equals.horn")
       parser.parse
-      parser.program.has_key?(Expressions::Const.new("equals")).should be_true
+      parser.program.rules.has_key?(Expressions::Const.new("equals")).should be_true
       parser.const_collection.has_key?(Expressions::Const.new("p")).should be_true
-      parser.queries.size.should eq(1)
-      parser.queries[0].should eq(
+      parser.program.queries.size.should eq(1)
+      parser.program.queries[0].should eq(
         Expressions::Appl.from_list([Expressions::Const.new("equals"), Expressions::Const.new("p"), Expressions::Var.new("Q_")])
       )
     end
