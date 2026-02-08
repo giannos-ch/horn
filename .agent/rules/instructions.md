@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # System Instructions for HORN AI Agent
 
 ## Project Overview
@@ -23,7 +27,7 @@ This repository contains the implementation of **HORN**, a higher-order logic pr
 - **Structure**: Place logic in `src/horn/`, keeping modules focused (e.g., `values/`, `types/`, `strategies/`).
 
 ## Testing
-- **Location**: All tests must be written in the `spec/` directory.
+- **Location**: All tests must be written in the `spec/unit` directory.
 - **Execution**: Run tests using the `crystal spec` command.
 
 ## Build & Run

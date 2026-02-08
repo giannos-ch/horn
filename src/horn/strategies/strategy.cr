@@ -4,11 +4,11 @@ module Horn
       {{Strategy.subclasses}}.find { |s| s.name == name }
     end
 
-    def visualize
-      raise "Not implemented"
+    def visualize : String
+      ""
     end
 
-    def solve(&)
+    def solve(&block : Solution -> Nil)
       raise "Not implemented"
     end
   end

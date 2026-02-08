@@ -23,7 +23,7 @@ module Horn
     def solve(&)
       @program.queries.each do |query|
         run(query) do |result|
-          yield({query, result})
+          yield DNFResult.new(query, result)
         end
       end
     end

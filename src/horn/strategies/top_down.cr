@@ -22,7 +22,7 @@ module Horn
 
     def solve(&)
       @program.queries.each do |query|
-        yield({query, eval(query)})
+        yield QueryResult.new(query, eval(query))
       end
     end
 

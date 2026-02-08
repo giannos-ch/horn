@@ -4,7 +4,7 @@ module Horn
   module Expressions
     class Lambda < Expr
       getter param : Var
-      getter param_type : Type?
+      property param_type : Type?
       getter body : Expr
 
       def initialize(@param : Var, @param_type : Type?, @body : Expr)

@@ -1,6 +1,6 @@
-require "../../src/horn/strategies/dnf_transformer"
+require "../../../src/horn/strategies/dnf_transformer"
 
-require "../spec_helper"
+require "../../spec_helper"
 
 module Horn
   include Expressions
