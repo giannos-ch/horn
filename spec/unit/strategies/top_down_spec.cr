@@ -1,6 +1,6 @@
-require "../../src/horn/strategies/top_down"
+require "../../../src/horn/strategies/top_down"
 
-require "../spec_helper"
+require "../../spec_helper"
 
 module Horn
   include Expressions

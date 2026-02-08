@@ -12,6 +12,10 @@ module Horn
       false
     end
 
+    def print(io : IO)
+      to_s(io)
+    end
+
     def |(other)
       raise "Not implemented"
     end

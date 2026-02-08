@@ -1,0 +1,5 @@
+neg :: o -> o.
+neg(R) :- not(R).
+
+p :: o -> o.
+p(R) :- neg(neg(p(R))).

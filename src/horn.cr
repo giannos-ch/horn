@@ -1,8 +1,7 @@
 require "option_parser"
 
 require "./horn/parser/parser"
-require "./horn/strategies/top_down"
-require "./horn/strategies/dnf_transformer"
+require "./horn/strategies/*"
 
 module Horn
   VERSION = "0.1.0"
@@ -31,7 +30,7 @@ module Horn
       verbose = true
     end
 
-    options_parser.on "-s", "--strategy=STRATEGY", "Strategy: valid values are 'top_down'(default) and 'dnf'" do |s|
+    options_parser.on "-s", "--strategy=STRATEGY", "Strategy: valid values are 'top_down'(default), 'dnf' and 'ht'" do |s|
       strategy_class = Strategy.with_name(s)
       if strategy_class.nil?
         puts "Invalid strategy: #{s}"
@@ -75,14 +74,9 @@ module Horn
   strategy = strategy_class.not_nil!.new(parser.program, parser.const_collection)
 
   begin
-    strategy.solve do |query_and_result|
-      query, result = query_and_result
-      puts "#{query} =>"
-      if result.is_a?(Enumerable)
-        puts result.join(", ")
-      else
-        puts result
-      end
+    strategy.solve do |solution|
+      solution.print(STDOUT)
+      puts
     end
   rescue e
     puts e.message

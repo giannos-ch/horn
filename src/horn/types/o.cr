@@ -15,6 +15,10 @@ module Horn
         io << "ο"
       end
 
+      def hash(hasher)
+        self.class.hash(hasher)
+      end
+
       def ==(other)
         other.is_a?(O)
       end

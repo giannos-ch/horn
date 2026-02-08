@@ -21,6 +21,10 @@ module Horn
         io << "(#{left} -> #{right})"
       end
 
+      def hash(hasher)
+        {self.class, left, right}.hash(hasher)
+      end
+
       def ==(other)
         return false unless other.is_a?(Arrow)
         left == other.left && right == other.right
